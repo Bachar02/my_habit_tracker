@@ -1,5 +1,4 @@
 
-// routes/habits.js
 const express = require('express');
 const { body, validationResult, query } = require('express-validator');
 const { authenticateToken } = require('./auth');
