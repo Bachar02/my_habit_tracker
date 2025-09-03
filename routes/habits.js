@@ -1,5 +1,3 @@
-
-// routes/habits.js (updated version)
 const express = require('express');
 const { body, validationResult, query } = require('express-validator');
 const authenticateToken = require('../middleware/auth');
