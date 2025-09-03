@@ -1,7 +1,8 @@
 
+// routes/habits.js (updated version)
 const express = require('express');
 const { body, validationResult, query } = require('express-validator');
-const { authenticateToken } = require('./auth');
+const authenticateToken = require('../middleware/auth');
 const router = express.Router();
 
 // Apply authentication middleware to all routes
