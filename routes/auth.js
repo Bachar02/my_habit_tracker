@@ -21,6 +21,19 @@ router.post('/register', [
     }
 
     const { email, password, displayName } = req.body;
+    console.log('Received email:', email); // Log the received email
+    console.log('Received password:', password.length); // Log the length of the password
+    console.log('Received displayName:', displayName); // Log the displayName
+
+    // Check for null values
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
+
+    if (typeof displayName !== 'string') {
+      displayName = email.split('@')[0]; // Use the username part of the email as default
+    }
+
     const db = req.app.locals.db;
 
     // Check if user already exists
@@ -44,7 +57,7 @@ router.post('/register', [
       `INSERT INTO users (email, password_hash, display_name) 
        VALUES ($1, $2, $3) 
        RETURNING id, email, display_name, created_at`,
-      [email, passwordHash, displayName || email.split('@')[0]]
+      [email, passwordHash, displayName]
     );
 
     const user = result.rows[0];
